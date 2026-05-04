@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>波卡英語 | 低年級全美拼讀課堂用語庫 - 手機語音優化版</title>
+    <title>波卡英語 | 低年級全美拼讀課堂用語庫 - 手機語音穩定版</title>
     <style>
         * {
             margin: 0;
@@ -272,7 +272,7 @@
 
     <div class="mobile-tip">
         📱 手機提示：直接點擊句子右側的 🔊 喇叭圖示，即可聽取美式發音。<br>
-        若第一次點擊無聲音，請確認手機未調為靜音模式，並再點一次喇叭。
+        ✅ 請使用 Safari 或 Chrome 瀏覽器以獲得最佳語音體驗。若第一次無聲，再點一次即可。
     </div>
 
     <div class="feature-grid">
@@ -307,7 +307,7 @@
     <div id="sentenceList" class="sentence-grid"></div>
     <footer>
         💡 點擊 🔊 喇叭聽美式發音 | 每句英文皆附繁體中文翻譯 | 超過540句課堂用語<br>
-        ✅ 手機請直接點擊喇叭圖示，若無聲請檢查音量或重新整理頁面。
+        ✅ 手機請直接點擊喇叭圖示，若無聲請再次點擊或檢查手機音量。
     </footer>
 </div>
 
@@ -549,44 +549,68 @@
 
     console.log("總雙語句數:", sentencesDB.length);
 
-    // ---------- 語音播放 (手機優化) ----------
+    // ---------- 語音播放 (手機穩定版，無彈窗) ----------
     let currentUtterance = null;
+    let speechSupported = true;
 
-    // 預先喚醒語音引擎 (無需使用者互動，但不會自動播放，只是載入語音列表)
-    if (typeof speechSynthesis !== 'undefined') {
-        speechSynthesis.getVoices(); // 觸發語音列表載入
+    // 簡單檢查語音支援 (不彈出 alert)
+    if (typeof window.speechSynthesis === 'undefined') {
+        speechSupported = false;
+        console.warn('瀏覽器不支援 Web Speech API');
+        // 在頁面底部顯示輕提示（非阻斷）
+        const footer = document.querySelector('footer');
+        if (footer) {
+            const warnMsg = document.createElement('div');
+            warnMsg.style.color = '#d9534f';
+            warnMsg.style.marginTop = '10px';
+            warnMsg.style.fontSize = '0.8rem';
+            warnMsg.innerText = '⚠️ 您的瀏覽器不支援語音功能，建議使用 Chrome 或 Safari。';
+            footer.appendChild(warnMsg);
+        }
+    } else {
+        // 預先喚醒語音引擎（無聲初始化）
+        try {
+            const silent = new SpeechSynthesisUtterance('');
+            silent.volume = 0;
+            window.speechSynthesis.speak(silent);
+        } catch(e) { /* 靜默忽略 */ }
     }
 
     window.speakText = function(text) {
-        // 取消任何正在播放的語音，避免衝突
-        if (currentUtterance) {
-            speechSynthesis.cancel();
-            currentUtterance = null;
+        if (!speechSupported) {
+            // 完全靜默，不做任何干擾
+            return;
         }
         try {
+            // 取消任何正在播放的語音
+            if (currentUtterance) {
+                window.speechSynthesis.cancel();
+                currentUtterance = null;
+            }
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US';
-            utterance.rate = 0.85;
-            utterance.pitch = 1.1;
+            utterance.rate = 0.9;
+            utterance.pitch = 1.0;
             utterance.volume = 1;
             utterance.onstart = () => {
-                console.log('播放開始:', text);
-            };
-            utterance.onerror = (event) => {
-                console.error('語音錯誤:', event);
-                // 錯誤時嘗試重新初始化
-                if (event.error === 'not-allowed') {
-                    alert('無法播放語音，請確認瀏覽器允許音訊，並點擊頁面後再試一次');
-                }
+                currentUtterance = utterance;
             };
             utterance.onend = () => {
-                currentUtterance = null;
+                if (currentUtterance === utterance) currentUtterance = null;
             };
-            currentUtterance = utterance;
-            speechSynthesis.speak(utterance);
+            utterance.onerror = (err) => {
+                // 錯誤時僅記錄，不顯示任何彈窗，避免干擾使用者
+                console.warn('語音播放錯誤:', err);
+                if (currentUtterance === utterance) currentUtterance = null;
+                // 可嘗試重新初始化語音服務（靜默）
+                try {
+                    window.speechSynthesis.cancel();
+                } catch(e) {}
+            };
+            window.speechSynthesis.speak(utterance);
         } catch (e) {
-            console.error('speechSynthesis 不支援或發生錯誤', e);
-            alert('您的瀏覽器不支援語音功能，請改用 Chrome 或 Safari。');
+            // 完全靜默，絕不彈窗
+            console.warn('speechSynthesis 例外:', e);
         }
     };
 
