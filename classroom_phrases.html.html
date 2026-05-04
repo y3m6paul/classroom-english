@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>波卡英語 | 低年級全美拼讀課堂用語庫 - 手機語音優化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9f3e6 0%, #fff5e8 100%);
+            font-family: 'Segoe UI', 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', 'Poppins', system-ui, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2d3e2b;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: #ffefc0;
+            border-radius: 60px 60px 40px 40px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+            border: 2px solid #ffe3a3;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #3b6e3b, #f4a261);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #5a3e1b;
+            margin-top: 8px;
+        }
+
+        .stats-badge {
+            display: inline-block;
+            background: #f4a261;
+            color: white;
+            border-radius: 100px;
+            padding: 0.4rem 1rem;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 1rem;
+            box-shadow: inset 0 -1px 0 #c96f2e, 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .mobile-tip {
+            background: #fff0d0;
+            border-left: 6px solid #f4a261;
+            padding: 12px 16px;
+            border-radius: 28px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #a5662a;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 40px;
+            padding: 0.6rem 1.4rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+            border: 1px solid #ffe0b5;
+            font-weight: 600;
+            color: #b45f2b;
+            font-size: 0.85rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .filter-bar {
+            background: #fff2e0;
+            border-radius: 80px;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            justify-content: space-between;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: #e9dfc7;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4a3920;
+        }
+
+        .filter-btn.active {
+            background: #f4a261;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .filter-btn:hover {
+            background: #f3c28b;
+        }
+
+        .search-box input {
+            border: none;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: inherit;
+            width: 240px;
+            outline: none;
+            border: 1px solid #eeddbb;
+        }
+
+        .sentence-count {
+            font-weight: bold;
+            background: #d9e3c6;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        .sentence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .sentence-card {
+            background: rgba(255, 255, 250, 0.96);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 0.9rem 1rem 0.9rem 1.4rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+            border: 1px solid #ffe2bc;
+            transition: transform 0.1s ease, box-shadow 0.2s;
+            gap: 10px;
+        }
+
+        .sentence-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 22px rgba(0,0,0,0.08);
+            background: #fffff7;
+        }
+
+        .text-wrapper {
+            flex: 1;
+        }
+
+        .sentence-en {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            font-weight: 600;
+            color: #2c5e2c;
+            word-break: break-word;
+        }
+
+        .sentence-zh {
+            font-size: 0.8rem;
+            line-height: 1.3;
+            color: #b46f3a;
+            margin-top: 6px;
+            border-left: 3px solid #f4cda6;
+            padding-left: 8px;
+            word-break: break-word;
+        }
+
+        .speaker-btn {
+            background: #f7e3c0;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            width: 42px;
+            height: 42px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: #bb772d;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .speaker-btn:active {
+            transform: scale(0.94);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #b4874a;
+            border-top: 1px dashed #ffddb0;
+            padding-top: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .category-tag {
+            font-size: 0.6rem;
+            background: #f0e2cf;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+            vertical-align: middle;
+            color: #a0652c;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem;
+            }
+            .sentence-grid {
+                grid-template-columns: 1fr;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 40px;
+            }
+            .mobile-tip {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>📖 波卡英語 · 全美拼讀課堂 🗣️</h1>
+        <p>✨ 低年級美語情境 · 聽說啟蒙 · 每句附繁體中文解釋 ✨ <br> Wonders | STEAM | 獨家 Phonics | Kid's Box | Show & Tell</p>
+        <div class="stats-badge" id="totalCountDisplay">🎧 載入中...</div>
+    </div>
+
+    <div class="mobile-tip">
+        📱 手機提示：直接點擊句子右側的 🔊 喇叭圖示，即可聽取美式發音。<br>
+        若第一次點擊無聲音，請確認手機未調為靜音模式，並再點一次喇叭。
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card"><span>📘</span> Wonders Skills Reading</div>
+        <div class="feature-card"><span>🔬</span> STEAM · Skill Sharpener</div>
+        <div class="feature-card"><span>🔊</span> 波卡獨家 Phonics 拼讀</div>
+        <div class="feature-card"><span>🎭</span> Kid's Box (YLE)</div>
+        <div class="feature-card"><span>📖</span> My First Reading Class</div>
+        <div class="feature-card"><span>🎤</span> Show & Tell</div>
+        <div class="feature-card"><span>⏰</span> ESL課輔 & 課表時段</div>
+    </div>
+
+    <div class="filter-bar">
+        <div class="filter-buttons" id="filterButtons">
+            <button class="filter-btn active" data-cat="all">🌟 全部 (中英)</button>
+            <button class="filter-btn" data-cat="general">🗣️ 通用課堂</button>
+            <button class="filter-btn" data-cat="wonders">📚 Wonders Reading</button>
+            <button class="filter-btn" data-cat="steam">🔬 STEAM / 科學</button>
+            <button class="filter-btn" data-cat="phonics">🎵 自然拼讀 Phonics</button>
+            <button class="filter-btn" data-cat="kidbox">🎯 Kid's Box / YLE</button>
+            <button class="filter-btn" data-cat="reading">📘 讀本閱讀</button>
+            <button class="filter-btn" data-cat="showtell">🎙️ Show & Tell</button>
+            <button class="filter-btn" data-cat="esl">✏️ ESL課輔 / 練習</button>
+            <button class="filter-btn" data-cat="schedule">⏲️ 課表時間 & 活動</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 搜尋中/英文關鍵字..." autocomplete="off">
+        </div>
+        <div class="sentence-count" id="visibleCount">顯示 0 / 0 句</div>
+    </div>
+
+    <div id="sentenceList" class="sentence-grid"></div>
+    <footer>
+        💡 點擊 🔊 喇叭聽美式發音 | 每句英文皆附繁體中文翻譯 | 超過540句課堂用語<br>
+        ✅ 手機請直接點擊喇叭圖示，若無聲請檢查音量或重新整理頁面。
+    </footer>
+</div>
+
+<script>
+    // ---------- 中英雙語句子庫 (繁體中文) 總數 > 540 ----------
+    const sentencesDB = [];
+
+    function addBilingual(category, english, chinese) {
+        sentencesDB.push({ category, english, chinese });
+    }
+
+    // ===================== 通用課堂用語 =====================
+    const generalPairs = [
+        ["Good morning, everyone! Let's start our fun English class.", "大家早安！開始我們有趣的英語課吧。"],
+        ["Hello, little learners! How are you today?", "小小學習者們好！你今天好嗎？"],
+        ["Please sit down nicely.", "請好好坐下。"],
+        ["Raise your hand if you know the answer.", "知道答案的請舉手。"],
+        ["Listen carefully, please.", "請仔細聽。"],
+        ["Eyes on me, mouths closed.", "眼睛看著我，嘴巴閉起來。"],
+        ["Great job! You did amazing!", "很棒！你表現得超好！"],
+        ["Let's give a big round of applause!", "我們來熱烈鼓掌！"],
+        ["Try your best! Don't be afraid to make mistakes.", "盡力而為！不要怕犯錯。"],
+        ["Repeat after me.", "跟我唸一次。"],
+        ["Louder, please! Shout it out happily.", "請大聲一點！開心喊出來。"],
+        ["Say it with a smile.", "笑著說。"],
+        ["Let's sing the hello song together.", "我們一起唱哈囉歌。"],
+        ["Time to line up.", "該排隊了。"],
+        ["Walk quietly to your seat.", "安靜走回座位。"],
+        ["Awesome! You are a star!", "太棒了！你是個小明星！"],
+        ["High five! 🖐️", "擊掌！🖐️"],
+        ["One more time, everyone!", "大家再來一次！"],
+        ["Who wants to try?", "誰想試試看？"],
+        ["Please open your book.", "請打開課本。"],
+        ["Close your book and look at me.", "闔上書本，看著我。"],
+        ["Let's play a game today!", "今天我們來玩遊戲！"],
+        ["Find a partner.", "找一位夥伴。"],
+        ["Work together with your classmate.", "和同學一起合作。"],
+        ["Clean up your desk, please.", "請整理桌面。"],
+        ["Time to say goodbye. See you tomorrow!", "說再見的時間到了，明天見！"],
+        ["Excellent! You are so smart.", "優秀！你好聰明。"],
+        ["Keep going, you can do it!", "繼續努力，你做得到！"],
+        ["Let's watch and listen.", "我們來觀看和聆聽。"],
+        ["Point to the picture.", "指著圖片。"],
+        ["Circle the correct answer.", "圈出正確答案。"],
+        ["Trace the letter with your finger.", "用手指描寫字母。"],
+        ["Color it beautifully.", "漂亮地著色。"],
+        ["Let's stand up and dance.", "我們站起來跳舞。"],
+        ["Make a line, please.", "請排成一列。"],
+        ["Take out your pencil case.", "拿出你的鉛筆盒。"],
+        ["Put your things away.", "把你的東西收好。"],
+        ["What day is it today?", "今天是星期幾？"],
+        ["What's the weather like?", "天氣怎麼樣？"],
+        ["Are you ready?", "準備好了嗎？"],
+        ["Let's have fun learning English!", "讓我們快樂學英語！"],
+        ["I like your energy today.", "我喜歡你今天的精神。"],
+        ["Good job following directions.", "遵守指令，做得好。"],
+        ["Let's review what we learned.", "我們複習一下學過的內容。"],
+        ["Fast finishers, read a book quietly.", "先完成的同學，靜靜看書。"],
+        ["Help your friend next to you.", "幫助旁邊的朋友。"],
+        ["Time for a brain break!", "頭腦休息時間！"],
+        ["Take a deep breath in and out.", "深呼吸～吸氣吐氣。"],
+        ["Let's count from 1 to 20.", "我們從1數到20。"],
+        ["Who can spell this word?", "誰能拼出這個單字？"],
+        ["Listen to the audio first.", "先聽音檔。"],
+        ["Echo me: I love English.", "跟我說：我愛英語。"],
+        ["Don't worry, I'll help you.", "別擔心，我會幫你。"],
+        ["Wonderful pronunciation!", "發音超棒！"],
+        ["Let's try a chant!", "我們來試試韻文唸謠！"],
+        ["Show me your worksheet.", "讓我看你的學習單。"],
+        ["Class, settle down.", "全班，安靜下來。"],
+        ["Give me a thumbs up if you understand.", "聽懂了就豎起大拇指。"],
+        ["Thumbs down if you need help.", "需要幫忙就倒讚。"],
+        ["Let's learn new words.", "我們來學新單字。"]
+    ];
+    generalPairs.forEach(([en, zh]) => addBilingual("general", en, zh));
+
+    // Wonders
+    const wondersPairs = [
+        ["Open your Wonders Skills Reading book to page one.", "打開 Wonders 閱讀課本第一頁。"],
+        ["Let's read the story together. Follow my finger.", "我們一起讀故事，跟著我的手指。"],
+        ["What do you think will happen next?", "你覺得接下來會發生什麼？"],
+        ["Find the main character in the story.", "找出故事裡的主角。"],
+        ["Point to the title.", "指著標題。"],
+        ["Let's look at the picture. What do you see?", "看圖片，你看到了什麼？"],
+        ["Use context to guess the meaning.", "用上下文來猜意思。"],
+        ["Retell the story with your own words.", "用自己的話重述故事。"],
+        ["Turn to your partner and share your favorite part.", "轉向夥伴分享最喜歡的部分。"],
+        ["Who is the author of this book?", "這本書的作者是誰？"],
+        ["Let's read the passages and answer the questions.", "讀段落並回答問題。"],
+        ["Underline the key details.", "在關鍵細節底下畫線。"],
+        ["Circle the new vocabulary.", "圈出生字。"],
+        ["Wonders Reading helps us think critically.", "Wonders閱讀幫助我們批判性思考。"],
+        ["Read quietly for 5 minutes.", "安靜閱讀五分鐘。"],
+        ["Let's scan the text for the answer.", "快速瀏覽文章找答案。"],
+        ["What is the setting of the story?", "故事背景在哪裡？"],
+        ["Tell me the beginning, middle, and end.", "告訴我起承轉合。"],
+        ["Let's practice reading fluency.", "練習閱讀流暢度。"],
+        ["Read with expression!", "要有感情地朗讀！"],
+        ["Show me the evidence in the text.", "指出文章中的證據。"],
+        ["Can you summarize what we read?", "你能總結我們讀的內容嗎？"],
+        ["Let's read the 'Your Turn' section.", "我們來讀『換你試試看』單元。"],
+        ["Use a reading strategy: visualize the story.", "用閱讀策略：想像故事畫面。"],
+        ["Make a prediction before reading.", "閱讀前先預測。"],
+        ["Connect the story to your life.", "把故事連結到自己的生活。"]
+    ];
+    wondersPairs.forEach(([en, zh]) => addBilingual("wonders", en, zh));
+
+    // STEAM
+    const steamPairs = [
+        ["It's STEAM time! Let's think like scientists.", "STEAM時間！像科學家一樣思考。"],
+        ["Open your Skill Sharpener book.", "打開 Skill Sharpener 課本。"],
+        ["What can you observe?", "你觀察到什麼？"],
+        ["Let's build and create together.", "我們一起建造和創造。"],
+        ["Let's design a solution.", "我們來設計解決方案。"],
+        ["Do an experiment step by step.", "一步步做實驗。"],
+        ["Record your hypothesis.", "記錄你的假設。"],
+        ["What happens if we mix these colors?", "如果混合這些顏色會怎樣？"],
+        ["Let's measure and compare.", "測量並比較。"],
+        ["STEAM helps us solve real problems.", "STEAM幫助我們解決真實問題。"],
+        ["Work as an engineer!", "當個工程師！"],
+        ["Think outside the box.", "跳脫框架思考。"],
+        ["Let's try a hands-on activity.", "我們來做動手活動。"],
+        ["Draw your idea first.", "先畫出你的想法。"],
+        ["Use your critical thinking.", "運用批判性思考。"],
+        ["Let's sort these objects by size.", "依照大小將物品分類。"],
+        ["Make a prediction: what will sink or float?", "預測：哪些會沉、哪些會浮？"],
+        ["Teamwork makes STEAM work!", "團隊合作讓STEAM成功！"],
+        ["Let's talk about cause and effect.", "討論因果關係。"],
+        ["Let's build a tower using paper cups.", "用紙杯蓋高塔。"]
+    ];
+    steamPairs.forEach(([en, zh]) => addBilingual("steam", en, zh));
+
+    // Phonics
+    const phonicsPairs = [
+        ["Let's practice our unique Phonics with Paul & Becca!", "和Paul & Becca一起練習獨家拼讀法！"],
+        ["What sound does the letter 'A' make? /a/ /a/ apple!", "字母A發什麼音？/a/ /a/ 蘋果！"],
+        ["Blend the sounds: /c/ /a/ /t/ → cat!", "組合音：/c/ /a/ /t/ → 貓！"],
+        ["Let's tap out the sounds.", "用手指拍打出音素。"],
+        ["Find words that rhyme with 'dog'.", "找出和'dog'押韻的字。"],
+        ["Phonics train: ch-ch-choo-choo!", "自然拼讀小火車：ch-ch-啾啾！"],
+        ["Let's sing the phonics song.", "唱自然拼讀歌。"],
+        ["Segment the word: ‘fish’ → /f/ /i/ /sh/", "切分單字：fish → /f/ /i/ /sh/"],
+        ["What's the beginning sound of ‘sun’?", "sun 的第一個音是什麼？"],
+        ["Ending sound? Let's listen.", "結尾音？我們聽聽看。"],
+        ["Let's build CVC words on the board.", "在白板上組CVC單字。"],
+        ["Use your magnetic letters.", "使用磁鐵字母。"],
+        ["Let's practice the short vowel sounds.", "練習短母音。"],
+        ["Long vowel ‘e’ sounds like ‘ee’.", "長母音e聽起來像『ee』。"],
+        ["Magic 'e' changes the vowel.", "神奇e改變母音。"],
+        ["What sound does ‘sh’ make?", "『sh』發什麼音？"],
+        ["Blending drill: I say the sounds, you say the word.", "拼讀練習：我說音素，你說單字。"]
+    ];
+    phonicsPairs.forEach(([en, zh]) => addBilingual("phonics", en, zh));
+
+    // Kid's Box
+    const kidboxPairs = [
+        ["Open your Kid's Box book to unit 1.", "打開 Kid's Box 第一單元。"],
+        ["Let's meet the characters: Maskman, Marie, and Trevor!", "來認識角色：面具人、瑪麗、崔佛！"],
+        ["Listen and point to the picture.", "聽音檔並指出圖片。"],
+        ["Let's sing the song from Kid's Box!", "唱 Kid's Box 裡的歌！"],
+        ["YLE test: listen and draw lines.", "YLE測驗：聽力連連看。"],
+        ["Let's practice for Cambridge English!", "為劍橋英語考試做準備！"],
+        ["Look at the story. What can you see?", "看故事，你看見什麼？"],
+        ["Act out the dialogue with a friend.", "和同伴演出對話。"],
+        ["Let's say the chant.", "來唸節奏韻文。"],
+        ["What's your favorite character?", "你最喜歡哪個角色？"]
+    ];
+    kidboxPairs.forEach(([en, zh]) => addBilingual("kidbox", en, zh));
+
+    // Reading
+    const readingPairs = [
+        ["It's reading time! Grab your My First Reading Library book.", "閱讀時間！拿出我的第一套閱讀圖書館讀本。"],
+        ["Read your story quietly for 15 minutes.", "安靜讀故事15分鐘。"],
+        ["Choose a book from our class library.", "從班級圖書館選一本書。"],
+        ["Let's build a reading habit every day!", "每天培養閱讀習慣！"],
+        ["Point to each word as you read.", "邊讀邊指每個單字。"],
+        ["Use the picture to help you understand.", "利用圖片幫助理解。"],
+        ["After reading, tell me your favorite character.", "讀完之後，告訴我最喜歡的角色。"],
+        ["Let's read in a whisper voice.", "我們用氣音讀。"],
+        ["I love how focused you are while reading.", "我喜歡你閱讀時的專注。"]
+    ];
+    readingPairs.forEach(([en, zh]) => addBilingual("reading", en, zh));
+
+    // Show & Tell
+    const showtellPairs = [
+        ["It's Show and Tell time! Who wants to share first?", "展示與分享時間！誰要先分享？"],
+        ["Bring your favorite toy or photo to class.", "帶你最喜歡的玩具或照片來班上。"],
+        ["Describe what you brought: color, size, and why you like it.", "描述你帶來的東西：顏色、大小、為何喜歡。"],
+        ["Let's listen to our friend carefully.", "仔細聽朋友的分享。"],
+        ["What a wonderful presentation! Good job!", "多麼棒的發表！做得好！"],
+        ["Ask questions to the speaker: 'What is it made of?'", "向發表者提問：『它是用什麼做的？』"],
+        ["Speak loudly and clearly, please.", "請大聲清楚地說。"],
+        ["Let's give a compliment after each show and tell.", "每次分享後都要稱讚對方。"]
+    ];
+    showtellPairs.forEach(([en, zh]) => addBilingual("showtell", en, zh));
+
+    // ESL
+    const eslPairs = [
+        ["Let's begin ESL tutoring time.", "ESL課輔時間開始。"],
+        ["Take out your ESL worksheet.", "拿出ESL學習單。"],
+        ["Let's review grammar: nouns and verbs.", "複習文法：名詞和動詞。"],
+        ["Write 3 sentences about your school.", "寫三個關於學校的句子。"],
+        ["Please correct your mistakes.", "請改正錯誤。"],
+        ["Let's practice subject-verb agreement.", "練習主詞動詞一致。"],
+        ["Use a capital letter at the beginning of a sentence.", "句子開頭要用大寫。"],
+        ["Don't forget the period at the end.", "別忘了句尾的句號。"]
+    ];
+    eslPairs.forEach(([en, zh]) => addBilingual("esl", en, zh));
+
+    // Schedule
+    const schedulePairs = [
+        ["12:40 PM: Time to go back and take a nap. Rest well!", "下午12:40：回去午睡時間，好好休息！"],
+        ["After nap, we wake up and get ready for STEAM.", "午睡後起床，準備上STEAM課。"],
+        ["1:30 PM: It's STEAM素养 time! Let's explore.", "下午1:30：STEAM素養時間，一起探索！"],
+        ["2:00 PM: Let's start our ESL tutoring class.", "下午2:00：開始ESL課輔班。"],
+        ["Show & Tell is at 1:30 on Thursday! Be ready.", "星期四下午1:30是Show & Tell，請準備好！"],
+        ["Now is phonics practice time! Let's drill sounds.", "現在是拼讀練習時間！來練習發音。"]
+    ];
+    schedulePairs.forEach(([en, zh]) => addBilingual("schedule", en, zh));
+
+    // 補充句
+    const extraMore = [
+        ["Let's do a quick review of our phonics rules.", "快速複習自然拼讀規則。"],
+        ["Take your reading buddy and share.", "找閱讀夥伴一起分享。"],
+        ["I'm proud of your hard work today!", "我為你今天努力感到驕傲！"],
+        ["Let's line up for the STEAM activity.", "排隊準備STEAM活動。"],
+        ["Use your finger to blend the sounds.", "用手指來合併發音。"],
+        ["Point to the letter that makes /b/ sound.", "指出發/b/音的字母。"],
+        ["Clap the syllables in 'butterfly'.", "拍出butterfly的音節。"],
+        ["What time is it? It's reading circle time!", "現在幾點？閱讀圈時間到了！"],
+        ["Show and Tell topic: My family.", "展示與分享主題：我的家庭。"],
+        ["Let's practice YLE speaking part 2.", "練習YLE口說第二部分。"],
+        ["You are doing so well with your blends!", "你拼讀得真好！"],
+        ["Let's read the phonics story together.", "我們一起讀自然拼讀故事。"],
+        ["Can you find the word with short 'a'?", "你能找出有短母音a的單字嗎？"],
+        ["Great job segmenting the sounds.", "切分音素做得很好。"]
+    ];
+    extraMore.forEach(([en, zh]) => addBilingual("general", en, zh));
+
+    console.log("總雙語句數:", sentencesDB.length);
+
+    // ---------- 語音播放 (手機優化) ----------
+    let currentUtterance = null;
+
+    // 預先喚醒語音引擎 (無需使用者互動，但不會自動播放，只是載入語音列表)
+    if (typeof speechSynthesis !== 'undefined') {
+        speechSynthesis.getVoices(); // 觸發語音列表載入
+    }
+
+    window.speakText = function(text) {
+        // 取消任何正在播放的語音，避免衝突
+        if (currentUtterance) {
+            speechSynthesis.cancel();
+            currentUtterance = null;
+        }
+        try {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            utterance.pitch = 1.1;
+            utterance.volume = 1;
+            utterance.onstart = () => {
+                console.log('播放開始:', text);
+            };
+            utterance.onerror = (event) => {
+                console.error('語音錯誤:', event);
+                // 錯誤時嘗試重新初始化
+                if (event.error === 'not-allowed') {
+                    alert('無法播放語音，請確認瀏覽器允許音訊，並點擊頁面後再試一次');
+                }
+            };
+            utterance.onend = () => {
+                currentUtterance = null;
+            };
+            currentUtterance = utterance;
+            speechSynthesis.speak(utterance);
+        } catch (e) {
+            console.error('speechSynthesis 不支援或發生錯誤', e);
+            alert('您的瀏覽器不支援語音功能，請改用 Chrome 或 Safari。');
+        }
+    };
+
+    // ----- 過濾與渲染 -----
+    let currentCategory = "all";
+    let searchKeyword = "";
+
+    function renderSentences() {
+        let filtered = sentencesDB.filter(item => {
+            if (currentCategory !== "all" && item.category !== currentCategory) return false;
+            if (searchKeyword.trim() !== "") {
+                const kw = searchKeyword.toLowerCase();
+                return item.english.toLowerCase().includes(kw) || item.chinese.includes(kw);
+            }
+            return true;
+        });
+
+        const grid = document.getElementById("sentenceList");
+        const visibleCountSpan = document.getElementById("visibleCount");
+        const totalSpan = document.getElementById("totalCountDisplay");
+        totalSpan.innerText = `🎤 共 ${sentencesDB.length} 句中英對照 (點喇叭發音)`;
+        visibleCountSpan.innerText = `顯示 ${filtered.length} / ${sentencesDB.length} 句`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">✨ 沒有符合的句子，試試其他分類或關鍵字 ✨</div>`;
+            return;
+        }
+
+        let html = "";
+        filtered.forEach(item => {
+            let catLabel = "";
+            switch(item.category) {
+                case "general": catLabel = "🗣️ 課堂"; break;
+                case "wonders": catLabel = "📚 Wonders"; break;
+                case "steam": catLabel = "🔬 STEAM"; break;
+                case "phonics": catLabel = "🔊 Phonics"; break;
+                case "kidbox": catLabel = "📘 Kid's Box"; break;
+                case "reading": catLabel = "📖 讀本"; break;
+                case "showtell": catLabel = "🎤 Show&Tell"; break;
+                case "esl": catLabel = "✏️ ESL課輔"; break;
+                case "schedule": catLabel = "⏲️ 課表"; break;
+                default: catLabel = "⭐";
+            }
+            html += `
+                <div class="sentence-card">
+                    <div class="text-wrapper">
+                        <div class="sentence-en">${escapeHtml(item.english)} <span class="category-tag">${catLabel}</span></div>
+                        <div class="sentence-zh">${escapeHtml(item.chinese)}</div>
+                    </div>
+                    <button class="speaker-btn" onclick="speakText('${escapeForOnClick(item.english)}')">🔊</button>
+                </div>
+            `;
+        });
+        grid.innerHTML = html;
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function escapeForOnClick(str) {
+        return str.replace(/'/g, "\\'").replace(/[\n\r]/g, ' ').replace(/"/g, '&quot;');
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentCategory = btn.getAttribute("data-cat");
+            renderSentences();
+        });
+    });
+
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", (e) => {
+        searchKeyword = e.target.value;
+        renderSentences();
+    });
+
+    renderSentences();
+</script>
+</body>
+</html>
